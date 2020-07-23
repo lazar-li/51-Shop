@@ -126,6 +126,7 @@ class Orders(db.Model):
         return "<Orders %r>" % self.id
 
 
+# 订单明细表
 class OrdersDetail(db.Model):
     __tablename__ = 'orders_detail'
     id = db.Column(db.Integer, primary_key=True)  # 编号

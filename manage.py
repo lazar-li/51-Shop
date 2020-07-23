@@ -27,3 +27,13 @@ manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()
+
+'''
+
+python manage.py db init # 创建迁移仓库，首次使用
+python manage.py db migrate # 创建迁移脚本
+python manage.py db upgrade # 把迁移应用到数据库中
+
+python manage.py runserver
+
+'''
