@@ -1,0 +1,24 @@
+<button type="button" onclick="addcart()" class ="btn btn-primary btn-primary">
+    <i class = "fa fa-shopping-cart"></i>添加到购物t</button>
+    
+    <script type="text/javascript">
+    function addcart() {
+        var user_id = {{ user_id }};
+        //获取当前用户的id.
+        var goods_id ={{ goods_id }}
+        //获取商品的ids
+        if( !user_id){
+        window.location.href ="/login/"; //如果没有登录,跳转到登录页
+        return;
+        }
+        var number =$('#shuliang').val();
+        //验证输入的数量是否合法
+        //获取输入的商品数量
+        //如果输入的数量不合法
+        if (number < 1) {
+            alert('数量不能小于1!');
+            return;
+        }
+        window.location.href ='/cart_add?goods.id='+goods_id+"&number="+number
+        }
+    </script>
