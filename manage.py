@@ -17,14 +17,6 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
 
-# @app.errorhandler(404)
-# def page_not_found(error):
-#     """
-#     404
-#     """
-#     return render_template("home/404.html"), 404
-
-
 if __name__ == '__main__':
     manager.run()
 

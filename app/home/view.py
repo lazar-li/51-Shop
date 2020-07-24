@@ -17,7 +17,8 @@ def user_login(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "user_id" not in session:
-            return redirect(url_for("home.login"))
+            # return redirect(url_for("home.login"))
+            pass
         return f(*args, **kwargs)
 
     return decorated_function
@@ -135,6 +136,17 @@ def order_list():
     """
     user_id = session.get("user_id",0)
 
-    orders = OrdersDetail.query.join(Orders).filter(Orders.user_id==user_id).order_by(Orders.addtime.desc()).all()
+    orders = OrdersDetail.query.join(Orders).filter(Orders.user_id == user_id).order_by(Orders.addtime.desc()).all()
     
     return render_template("home/order_list.html",orders=orders)
+
+# ------------------------------清空购物车-------------------------
+@home.route("/cart_clear/")
+@user_login
+def cart_clear():
+
+    user_id = session.get('user_id', 0)  # 获取用户ID,判断用户是否登录
+    Cart.query.filter_by(user_id=user_id).update({'user_id': 0})
+    #提交
+    db.session.commit()
+    return redirect(url_for('home.shopping_cart'))

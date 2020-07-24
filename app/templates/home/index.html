@@ -1,220 +1,272 @@
-{% extends "home/common.html" %}
-{% block content %}
-	<!-- 轮播广告及热门商品 -->
-	<div class="container mr-sl mr-sl-1">
-		<div class="mr-spotlight mr-spotlight-1  row">
-			<!-- 显示轮播广告 -->
-			<div
-				class=" col-lg-9 col-md-12  col-sm-3 hidden-sm   col-xs-6 hidden-xs ">
-				<div class="mr-module module " id="Mod159">
-					<div class="module-inner">
-						<div class="module-ct">
-							<div class="mijoshop">
-								<div class="container_oc">
-									<div class="slideshow">
-										<div id="slidershow" class="nivoSlider">
-											<a href="#" class="nivo-imageLink" style="display: block;cursor:default">
-												<img src="{{url_for('static',filename='images/banner/img1.png')}}" class="img-responsive"
-												style="display: none;">
-											</a>
-											<a href="#"
-												class="nivo-imageLink" style="display: none;cursor:default">
-											<img src="{{url_for('static',filename='images/banner/img2.png')}}" class="img-responsive"
-												style="display: none;">
-											</a>
-											<a href="#" class="nivo-imageLink" style="display: none;cursor:default">
-												<img src="{{url_for('static',filename='images/banner/img3.png')}}" class="img-responsive"
-												style="display: none;">
-											</a>
-										</div>
-									</div>
-									<script type="text/javascript">
-										//实现调用幻灯片插件轮播广告
-										jQuery(document).ready(function() {
-											jQuery('#slidershow').nivoSlider();
-										});
-									</script>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 显示热门商品 -->
-			<div class="col-lg-3  col-md-6 hidden-md   col-sm-3 hidden-sm   col-xs-6 hidden-xs ">
-				<div class="mr-module module highlight " id="Mod160">
-					<div class="module-inner">
-						<h3 class="module-title ">
-							<span>热门商品</span>
-						</h3>
-						<div class="module-ct">
-							<div class="mijoshop">
-								<div class="container_oc">
-									<div class="box_oc">
-										<!-- 循环显示热门商品 ：添加两条商品信息-->
-										{% for item in hot_goods %}
-										<div class="box-product product-grid">
-											<div>
-												<div class="image">
-													<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}">
-														<img src="{{url_for('static',filename='images/goods/'+item.picture)}}" width="250px">
-													</a>
-												</div>
-												<div class="name">
-													<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}">{{item.name}}</a>
-												</div>
-												<!-- 星级评分条 -->
-												<div class="rating">
-													<span class="fa fa-stack"><i
-														class="fa fa-star fa-stack-2x"></i><i
-														class="fa fa-star-o fa-stack-2x"></i> </span> <span
-														class="fa fa-stack"><i
-														class="fa fa-star fa-stack-2x"></i><i
-														class="fa fa-star-o fa-stack-2x"></i> </span> <span
-														class="fa fa-stack"><i
-														class="fa fa-star fa-stack-2x"></i><i
-														class="fa fa-star-o fa-stack-2x"></i> </span> <span
-														class="fa fa-stack"><i
-														class="fa fa-star fa-stack-2x"></i><i
-														class="fa fa-star-o fa-stack-2x"></i> </span> <span
-														class="fa fa-stack"><i
-														class="fa fa-star fa-stack-2x"></i><i
-														class="fa fa-star-o fa-stack-2x"></i> </span>
-												</div>
-												<!-- // 星级评分条 -->
-												<!-- 商品价格 -->
-												<div class="price">
-													<span class="price-new">价格：{{item.current_price}} 元</span>
-												</div>
-												<!-- // 商品价格 -->
-											</div>
-										</div>
-										{% endfor %}
-										<!-- // 循环显示热门商品 ：添加两条商品信息-->
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- // 显示热门商品 -->
-		</div>
-	</div>
-	<!-- //轮播广告及热门商品  -->
-	<!-- 最新上架及打折商品展示 -->
-	<nav class="container mr-masstop  hidden-sm hidden-xs">
-	<div class="custom">
-		<div>
-			<div class="ja-tabswrap default" style="width: 100%;">
-				<div id="myTab" class="container">
-					<h3 class="index_h3">
-						<span class="index_title">最新上架</span>
-					</h3>
-					<!-- //最新上架选项卡 -->
-					<div class="ja-tab-content ja-tab-content col-6 active"
-						style="opacity: 1; width: 100%; visibility: visible;">
-						<div class="ja-tab-subcontent">
-							<div class="mijoshop">
-								<div class="container_oc">
-									<div class="row">
-										<!-- 循环显示最新上架商品 ：添加12条商品信息-->
-										{% for item in new_goods %}
-										<div class="product-grid col-lg-2 col-md-3 col-sm-6 col-xs-12">
-											<div class="product-thumb transition">
-												<div class="actions">
-													<div class="image">
-														<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}">
-															<img src="{{url_for('static',filename='images/goods/'+item.picture)}}" alt="{{item.name}}" class="img-responsive">
-														</a>
-													</div>
-													<div class="button-group">
-														<div class="cart">
-															<button class="btn btn-primary btn-primary" type="button"
-																data-toggle="tooltip"
-																onclick='javascript:window.location.href="/cart_add/?goods_id={{item.id}}&number=1"; '
-																style="display: none; width: 33.3333%;"
-																data-original-title="加入到购物车">
-																<i class="fa fa-shopping-cart"></i>
-															</button>
-														</div>
-													</div>
-												</div>
-												<div class="caption">
-													<div class="name" style="height: 40px">
-														<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}">
-															{{item.name}}
-														</a>
-													</div>
-													<p class="price">
-														价格：{{item.current_price}}元
-													</p>
-												</div>
-											</div>
-										</div>
-										{% endfor %}
-										
-										<!-- //循环显示最新上架商品：添加12条商品信息 -->
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- //最新上架选项卡 -->
-					<!-- 打折商品选项卡 -->
-					<h3 class="index_h3"><span class="index_title">打折商品</span></h3>
-					<div class="ja-tab-subcontent">
-						<div class="mijoshop">
-							<div class="container_oc">
-								<div class="row">
-									<!-- 循环显示打折商品 ：添加12条商品信息-->
-									{% for item in sale_goods %}
-									<div class="product-grid col-lg-2 col-md-3 col-sm-6 col-xs-12">
-										<div class="product-thumb transition">
-											<div class="actions">
-												<div class="image">
-													<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}">
-														<img src="{{url_for('static',filename='images/goods/'+item.picture)}}"
-															 alt="{{item.name}}" class="img-responsive">
-													</a>
-												</div>
-												<div class="button-group">
-													<div class="cart">
-														<button class="btn btn-primary btn-primary" type="button"
-															data-toggle="tooltip"
-															onclick='javascript:window.location.href="/cart_add/?goods_id={{item.id}}&number=1"; '
-															style="display: none; width: 33.3333%;"
-															data-original-title="加入到购物车">
-															<i class="fa fa-shopping-cart"></i>
-														</button>
-													</div>
-												</div>
-											</div>
-											<div class="caption">
-												<div class="name" style="height: 40px">
-													<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}" style="width: 95%">
-														{{item.name}}</a>
-												</div>
-												<div class="name" style="margin-top: 10px">
-													<span style="color: #0885B1">分类：</span>{{item.subcat.cat_name}}
-												</div>
-												<span class="price"> 现价：{{item.current_price}} 元
-												</span><br> <span class="oldprice">原价：{{item.original_price}}元
-												</span>
-											</div>
-										</div>
-									</div>
-									{% endfor %}
-									<!-- 循环显示打折商品 ：添加12条商品信息-->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- //打折商品 选项卡-->
-			</div>
-		</div>
-	</div>
-	</nav>
-<!-- //版权栏 -->
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高德地图+58租房</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/jquery.range.css"/>
+    <script src="http://cache.amap.com/lbs/static/jquery-1.9.1.js"></script>
+    <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+    <!-- 此处script标签中填写key -->
+    <script src="http://webapi.amap.com/maps?v=1.3&key=b8404d2f55b58b8e0892e405259b2288&plugin=AMap.ArrivalRange,AMap.Scale,AMap.Geocoder,AMap.Transfer,Amap.Autocomplete"></script>
+    <style>
+        /* 面板控制样式 */
+        .control-panel{
+            position: absolute;
+            top:30px;
+            left:20px;
+        }
+        /* 面板内容样式 */
+        .control-entry{
+            width: 290px;
+            background-color: rgba(119, 136, 153, 0.8);
+            font-family: fantasy,sans-serif;
+            text-align: left;
+            color: white;
+            overflow: hidden;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        /* 文字与右侧的距离 */
+        .control-input{
+            margin-left: 120px;
+        }
+        /* 输入框宽度 */
+        .control-input input[type="text"] {
+            width: 160px;
+        }
+        /* 文字样式 */
+        .control-panel label{
+            float: left;
+            width: 120px;
+        }
+        /* 路线规划信息窗体样式 */
+        #transfer-panel{
+            position: absolute;
+            background-color: white;
+            max-height: 80%;
+            overflow-y: auto;
+            top: 150px;
+            left: 20px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <!-- 显示输入地址面板 -->
+    <div class="control-panel">
+        <div class="control-entry">
+            <label>输入工作地点:</label>
+            <div class="control-input">
+                <input id="work-location" type="text">
+            </div>
+        </div>
+        <!-- 显示导入房源的面板 -->
+        <div class="control-entry">
+            <label>导入房源文件:</label>
+            <div class="control-input">
+                <input type="file" name="file" onChange="importRentInfo(this)">
+            </div>
+        </div>
+    </div>
+    <div id="transfer-panel"></div>
+    <script>
+
+        // 部分地图
+        var map = new AMap.Map("container",{
+            resizeEnable:true,             // 页面可调整大小
+            zoomEnable:true,               // 可缩放
+            center:[116.297428, 39.90923], // 地图中心，这里使用的是北京的经纬度
+            zoom:11                        // 缩放等级，数字越大离地球越近
+        });
+
+        // 添加标尺
+        var scale = new AMap.Scale();
+        map.addControl(scale);
+
+        // 经度，纬度，时间，通勤方式(默认是地铁+公交)
+        var x, y, t, vehicle = "SUBWAY,BUS";
+        // 工作地点，工作标记
+        var workAddress, workMarker;
+        // 房源标记数组
+        var rentMarkerArray = [];
+        // 多变形数组，存储到达范围的计算结果
+        var polygonArray = [];
+        // 路线规划
+        var amapTransfer;
+
+        // 到达范围对象
+        var arrivalRange = new AMap.ArrivalRange();
+
+        // 信息窗体对象
+        var infoWindow = new AMao.infoWindow({
+            offset: new AMap.Pixel(0,-30)
+        });
+
+        // 地址自动补全对象
+        var auto = new AMap.Autocomplete({
+            // 根据id指定输入内容
+            input:"work-location"
+        });
+
+        // 添加事件监听，在选择完地址以后调用workLocationSelected方法
+        AMap.event.addListener(auto, "select", workLocationSelected);
+
+        // 选择工作地点后触发的方法
+        function workLocationSelected(e) {
+            // 更新工作地点，加载到达范围
+            workAddress = e.poi.name;
+            // 调用加载1小时到达区域的方法
+            loadWorkLocation();
+        }
+        
+        // 加载工作地点标记
+        function loadWorkMarker(x, y, locationName) {
+            workMarker = new AMap.Marker({
+                map: map,
+                title: locationName,
+                icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png',
+                position: [x,y]
+            });
+        }
+
+        // 清除已有的到达区域
+        function delWorkLocation() {
+            if (polygonArray) map.remove(polygonArray);
+            if (workMarker) map.remove(workMarker);
+            polygonArray = [];
+        }
+
+        // 加载到达范围
+        function loadWorkRange(x, y, t, color ,v) {
+            arrivalRange.search([x, y], t, function(status, result) {
+                if (result.bounds) {
+                    for (var i = 0; i < result.bounds.length; i++) {
+                        // 多边形对象
+                        var polygon = new AMap.Polygon({
+                            map: map,
+                            fillColor: color,   // 填充色
+                            fillOpacity: "0.4", // 透明度
+                            strokeWeight: 1     // 线宽
+                        });
+                        // 到达范围的多边形路径
+                        polygon.setPath(result.bounds[i]);
+                        // 增加多边形
+                        polygonArray.push(polygon);
+                    }
+                }
+            },{
+                policy: v
+            });
+        }
+
+        // 加载1小时到达区域
+        function loadWorkLocation() {
+            // 清除已有的到达区域
+            delWorkLocation();
+            // 创建地址坐标对象
+            var geocoder = new AMap.Geocoder({
+                city: "北京",
+                radius: 1000
+            });
+            //获取位置
+            geocoder.getLocation(workAddress, function(status, result) {
+                if (status === "complete" && result.info === "ok") {
+                    var geocode = result.geocodes[0];  // 获取地址编码
+                    x = geocode.location.getLng();   // 经度
+                    y = geocode.location.getLat();   // 纬度
+                    // 加载工作地点标记
+                    loadWorkMarker(x, y);
+                    // 加载工作地点1小时内到达的范围
+                    loadWorkRange(x, y, 60, "#3f67a5", vehicle);
+                    // 地图移动到工作地点的位置
+                    map.setZoomAndCenter(12, [x, y]);
+                }
+            })
+        }
+
+        //导入房源信息触发的方法
+        function importRentInfo(fileInfo) {
+            //获取房源文件名称
+            var file = fileInfo.files[0].name;
+            loadRentLocationByFile(file);
+        }
+        //清除现有的房源标记
+        function delRentLocation() {
+            if (rentMarkerArray) map.remove(rentMarkerArray);
+            rentMarkerArray = [];
+        }
+        //加载房源位置
+        function loadRentLocationByFile(fileName) {
+            //清除现有的房源标记
+            delRentLocation();
+            //所有的地点都记录在集合中
+            var rent_locations = new Set();
+            //获取文件中的房源信息
+            $.get(fileName, function(data) {
+                //分割信息
+                data = data.split("\n" );
+                //遍历房源位置
+                data.forEach(function(item,index) {
+                    rent_locations.add(item.split(",")[1]);
+                });
+                rent.locations.forEach(function(element, index) {
+                    //加上房源标记
+                    addMarkerByAddress(element);
+                });
+            });
+        }
+        // 添加房源位置标记
+        function addMarkerByAddress(address) {
+            //地理编码对象
+            var geocoder = new AMap.Geocoder({
+                city:"北京",
+                radius: 1000
+            });
+            //获取位置
+            geocoder.getLocation(address, function(status, result) {
+                if (status === "complete" && result.info === 'OK') {
+                    //获取地理编码
+                    var geocode = result.geocodes[0];
+                    //标记对象
+                    rentMarker = new AMap.Marker({
+                        map: map,        //显示标记的地图
+                        title: address, // 鼠标移动至标记时所显示的文字
+                        //标记图标地址
+                        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
+                        //位置
+                        position: [geocode.location.getLng(), geocode.location.getLat()]
+                    });
+                    rentMarkerArray.push(rentMarker);
+                    //相关房源网络地址
+                    rentMarker.content = "<div>房源: <a target = '_blank' href='http://bj.58.com/pinpaigongyu/?key=" + address +"'>" + address + " </a><div>"
+                    //标记的事件处理
+                    rentMarker.on('click', function(e) {
+                        //设置信息窗体显示的内容
+                        infoWindow.setContent(e.target.content); 
+                        infowindow.open(map, e.target.getPosition());
+                        //路线规划是否清除
+                        if (amapTransfer) amapTransfer.clear();
+                        //换乘对象
+                        amapTransfer = new AMap.Transfer({
+                            map: map,
+                            policy: AMap.TransferPolicy.LEAST_TIME,
+                            city:"北京市",
+                            panel: 'transfer-panel'
+                        });
+                        //根据起点、终点坐标查询换乘路线
+                        amapTransfer. search([{
+                            keyword: workAddress
+                        }, {
+                            keyword: address
+                        }],function(status, result) {})
+                    });
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
